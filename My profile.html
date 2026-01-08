@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>My Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Playfair+Display&display=swap" rel="stylesheet" />
+<style>
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body {
+    font-family:'Cormorant Garamond', serif;
+    background:#f7f3ee url('https://www.transparenttextures.com/patterns/old-mathematics.png') repeat;
+    color:#4b3b2b;
+    line-height:1.4;
+    padding:1rem 1rem 1.5rem;
+    overflow-x:hidden;
+  }
+  .sidebar-nav {
+    position:fixed; top:50%; left:0;
+    transform:translateY(-50%);
+    width:140px; padding:1.2rem 0;
+    background:#fff9f0; border-right:3px solid #a67c52;
+    box-shadow:3px 3px 12px rgba(166,124,82,0.3);
+    border-top-right-radius:12px; border-bottom-right-radius:12px;
+    z-index:25; display:flex; flex-direction:column; align-items:center;
+    font-family:'Playfair Display', serif;
+  }
+  .sidebar-nav ul {
+    width:100%; list-style:none;
+    display:flex; flex-direction:column; gap:1rem;
+    padding-left:0; margin:0;
+  }
+  .sidebar-nav li {
+    width:100%; text-align:center;
+    border-top:0.7px solid #d9b984;
+    border-bottom:0.7px solid #fbecc5;
+    padding:0.3rem 0;
+    box-shadow:inset 0 1px 0 0 #fbecc5, inset 0 -1px 0 0 #d9b984;
+  }
+  .sidebar-nav li:first-child {border-top:none;}
+  .sidebar-nav li:last-child {border-bottom:none;}
+  .sidebar-nav a {
+    display:block; text-decoration:none;
+    font-size:1.05rem; font-weight:600;
+    color:#7c5c43; padding:0.1rem 0;
+    border-bottom:2px solid transparent;
+    transition:color 0.3s, border-bottom-color 0.3s;
+  }
+  .sidebar-nav a:hover, .sidebar-nav a:focus {
+    color:#a67c52; border-bottom-color:#a67c52;
+    outline:none;
+  }
+  .container {
+    max-width:900px; margin:auto 0 auto 160px;
+    background:#fff9f0; border:5px solid #7c5c43;
+    border-radius:16px; box-shadow:5px 5px 15px rgba(124,92,67,0.45);
+    overflow:hidden;
+  }
+  .banner {
+    position:relative; height:280px;
+    background:url('banner.jpg') center/cover no-repeat;
+    border-bottom:5px solid #7c5c43;
+    filter: sepia(0.35) contrast(1.1) brightness(0.9);
+  }
+  .profile-pic {
+    position:absolute; bottom:-70px; left:50%;
+    transform:translateX(-50%);
+    width:130px; height:130px;
+    border-radius:50%; border:6px solid #f7f3ee;
+    box-shadow:0 5px 20px rgba(124,92,67,0.7);
+    object-fit:cover; object-position:center 15%;
+    background:#fff9f0; z-index:10;
+  }
+  header {
+    text-align:center;
+    padding-top:70px;
+    padding-bottom:0.8rem;
+    border-bottom:3px solid #7c5c43;
+    margin:0 1.5rem;
+  }
+  header h1 {
+    font-weight:700;
+    font-size:2.75rem;
+    color:#7c5c43;
+    margin-bottom:0.05rem;
+  }
+  header p {
+    font-size:1.1rem;
+    color:#a28560;
+    margin-bottom:0.2rem;
+  }
+  .divider {
+    width:60px; height:8px;
+    margin:0.5rem auto 1rem;
+    background:linear-gradient(90deg,#7c5c43 20%,#a28560 50%,#7c5c43 80%);
+    border-radius:10px; box-shadow:0 0 6px #a28560;
+  }
+  section {
+    margin:1.2rem 1.5rem; padding:0.8rem 1rem;
+    border:1.5px solid #d8c9b3; border-radius:10px;
+    box-shadow:4px 4px 8px rgba(124,92,67,0.15);
+    background-color:#fffaf0;
+  }
+  section:last-child {margin-bottom:2.5rem;}
+  section h2 {
+    font-size:1.9rem; font-weight:700;
+    color:#7c5c43;
+    margin-bottom:0.3rem;
+    border-left:10px solid #a28560;
+    padding-left:18px;
+    text-transform:uppercase;
+  }
+  #about p, #contact p {
+    margin-bottom:0.5rem;
+    font-size:1rem;
+  }
+  #skills ul {
+    list-style:none; display:flex; flex-wrap:wrap;
+    gap:6px; justify-content:center;
+  }
+  #skills ul li {
+    background:#d8c9b3;
+    padding:0.35rem 0.8rem;
+    border-radius:28px;
+    color:#7c5c43;
+    font-weight:700;
+    font-size:0.9rem;
+    box-shadow:inset 3px 3px 7px #fff9f0,3px 3px 12px rgba(124,92,67,0.4);
+    border:2.5px solid #a28560;
+    cursor:default;
+    user-select:none;
+  }
+  #education ul {list-style:none;}
+  #education ul li {
+    margin-bottom:0.8rem;
+    color:#5c4b3b;
+    font-size:0.95rem;
+  }
+  #education ul li strong {
+    display:block;
+    font-weight:700;
+    font-size:1.18rem;
+    color:#7c5c43;
+  }
+  #education ul li span {
+    font-style:italic;
+    font-size:0.96rem;
+    color:#a28560;
+  }
+  #contact ul {
+    list-style:none;
+    margin-top:1rem;
+    padding-left:0;
+  }
+  #contact ul li {
+    font-size:1rem;
+    color:#7c5c43;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  footer {
+    max-width:900px;
+    margin:0 auto 0.8rem;
+    text-align:center;
+    font-size:0.85rem;
+    color:#7c5c43;
+    letter-spacing:2px;
+    font-variant:small-caps;
+    user-select:none;
+  }
+</style>
+</head>
+<body>
+<nav class="sidebar-nav">
+  <ul>
+    <li><a href="#about">About Me</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="banner">
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+  </div>
+  <header>
+    <h1>Venkatesh R Gowda</h1>
+    <p>Software Engineer & Web Developer</p>
+  </header>
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="divider"></div>
+    <p>I’m a passionate Computer Science student who enjoys exploring technology, building creative projects, and solving real-world problems.</p>
+  </section>
+  <section id="skills">
+    <h2>My Skills</h2>
+    <div class="divider"></div>
+    <ul>
+      <li>C Programming</li>
+      <li>Python</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JS</li>
+      <li>Node.js</li>
+      <li>Express.js</li>
+      <li>React.js</li>
+      <li>Mongodb</li>
+      <li>Communication</li>
+      <li>Canva</li>
+    </ul>
+  </section>
+  <section id="education">
+    <h2>Education</h2>
+    <div class="divider"></div>
+    <ul>
+      <li><strong>High School</strong><br>Sriramakrishna Vidyashala</li>
+      <li><strong>PUC</strong><br>ALLEN</li>
+      <li><strong>UG</strong><br>Dayananda Sagar University (DSU)</li>
+    </ul>
+  </section>
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="divider"></div>
+    <ul>
+      <li>venki@gmail.com</li>
+      <li>+91 9876543210</li>
+      <li>Harohalli, Ramanagara</li>
+    </ul>
+  </section>
+</div>
+<footer>&hearts;&hearts; Thank You &hearts;&hearts;</footer>
+</body>
+</html>
